@@ -3,15 +3,6 @@ import StepLayout from '@components/StepLayout';
 import Text from '@components/Text';
 import { FONT_SIZE, COLORS } from '@constants/theme';
 
-/*
-  # Expo Router 파일 기반 라우팅
-    - 이 파일은 app/step02.js로 저장되어 /step02 경로로 자동 매핑됩니다.
-    - Stack.Screen의 options를 설정하려면 아래와 같이 export const options를 사용합니다.
-*/
-export const options = {
-  title: 'Step 02 : 기본 컴포넌트',
-};
-
 export default function Step02() {
   return (
     <StepLayout

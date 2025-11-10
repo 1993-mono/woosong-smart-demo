@@ -24,84 +24,8 @@ export default function MenuScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>React Native A-Z</Text>
-      {/*
-        # ScrollView : 스크롤 가능한 컨테이너 컴포넌트
-          - 내용이 화면보다 길 때 세로로 스크롤할 수 있게 해줍니다.
-          - 웹의 <div style="overflow-y: scroll;">와 유사합니다.
-      */}
-      <ScrollView style={styles.listContainer}>
-        {/*
-          # TouchableOpacity : 터치 가능한 버튼 컴포넌트
-            - onPress 이벤트를 처리할 수 있으며, 터치 시 약간 투명해지는 피드백 효과가 있습니다.
-            - 웹의 <button>과 유사하지만, React Native에서는 버튼 대신 TouchableOpacity를 많이 사용합니다.
-        */}
-        {steps.map((step) => {
-          // 파일 기반 라우팅: step01.js → /step01
-          const path = `/step${step.number}`;
-          return (
-            <TouchableOpacity
-              key={path}
-              style={styles.stepItem}
-              onPress={() => router.push(path)} // router.push : 다른 화면으로 이동하는 함수 (파일 기반 라우팅)
-            >
-              <Text style={styles.stepNumber}>Step {step.number}</Text>
-              <Text style={styles.stepTitle}>{step.title}</Text>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-      <StatusBar style="auto" />
+    <View>
+      <Text>홈 화면입니다.</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.BACKGROUND,
-    paddingTop: 20,
-  },
-  title: {
-    fontFamily: FONTS.PRETENDARD,
-    fontSize: FONT_SIZE.XXLARGE,
-    color: COLORS.TEXT,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  listContainer: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  stepItem: {
-    borderRadius: 10,
-    borderLeftWidth: 4,
-    borderLeftColor: COLORS.PRIMARY,
-    backgroundColor: '#fff',
-    // Android 그림자 효과
-    elevation: 3,
-    // iOS 그림자 효과
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    padding: 20,
-    marginBottom: 15,
-  },
-  stepNumber: {
-    fontFamily: FONTS.PRETENDARD,
-    fontSize: FONT_SIZE.BASE,
-    color: COLORS.PRIMARY,
-    fontWeight: '700',
-    marginBottom: 5,
-  },
-  stepTitle: {
-    fontFamily: FONTS.PRETENDARD,
-    fontSize: FONT_SIZE.MEDIUM,
-    color: COLORS.TEXT,
-    fontWeight: '700',
-  },
-});
-
