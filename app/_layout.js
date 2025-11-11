@@ -1,7 +1,7 @@
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Stack } from 'expo-router';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomSplashScreen from '@components/SplashScreen';
 import Header from '@components/Header';
@@ -27,7 +27,15 @@ export default function RootLayout() {
       - fontsLoaded가 true가 되면 폰트 사용 가능.
   */
   const [fontsLoaded] = useFonts({
-    'Pretendard': require('@assets/fonts/Pretendard/PretendardVariable.ttf'),
+    'Pretendard-Thin': require('@assets/fonts/Pretendard/Pretendard-Thin.ttf'),
+    'Pretendard-ExtraLight': require('@assets/fonts/Pretendard/Pretendard-ExtraLight.ttf'),
+    'Pretendard-Light': require('@assets/fonts/Pretendard/Pretendard-Light.ttf'),
+    'Pretendard-Regular': require('@assets/fonts/Pretendard/Pretendard-Regular.ttf'),
+    'Pretendard-Medium': require('@assets/fonts/Pretendard/Pretendard-Medium.ttf'),
+    'Pretendard-SemiBold': require('@assets/fonts/Pretendard/Pretendard-SemiBold.ttf'),
+    'Pretendard-Bold': require('@assets/fonts/Pretendard/Pretendard-Bold.ttf'),
+    'Pretendard-ExtraBold': require('@assets/fonts/Pretendard/Pretendard-ExtraBold.ttf'),
+    'Pretendard-Black': require('@assets/fonts/Pretendard/Pretendard-Black.ttf'),
   });
 
   if (!fontsLoaded) {
@@ -38,28 +46,17 @@ export default function RootLayout() {
     <View style={styles.container}>
       <Header />
       {/*
-        # ScrollView : Header와 Stack을 감싸서 스크롤 가능하게 만듦
-          - Header가 스크롤과 함께 움직입니다.
-          - Stack의 각 화면도 스크롤 가능합니다.
-      */}
-      <ScrollView
-        style={[styles.scrollView, { paddingTop: insets.top + LAYOUT.HEADER_HEIGHT }]}
-        contentContainerStyle={styles.scrollContent}
-        shwsVerticalScrollIndicator={false}
-      >
-        {/*
           # Stack : Expo Router의 스택 네비게이션 컴포넌트
             - 파일 기반 라우팅을 사용하여 자동으로 화면을 등록합니다.
             - screenOptions로 모든 화면에 공통으로 적용될 스타일을 설정할 수 있습니다.
         */}
-        <View style={styles.stackContainer}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          />
-        </View>
-      </ScrollView>
+      <View style={[styles.stackContainer, { paddingTop: insets.top + LAYOUT.HEADER_HEIGHT }]}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </View>
       <View style={styles.bottomNavContainer}>
         <BottomNavigation />
       </View>
@@ -70,7 +67,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     overflow: 'hidden',
   },
   scrollView: {
@@ -81,6 +77,5 @@ const styles = StyleSheet.create({
   },
   stackContainer: {
     flex: 1,
-    minHeight: '100%',
   },
 });

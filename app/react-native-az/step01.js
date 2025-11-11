@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import StepLayout from '@components/StepLayout';
 import Text from '@components/Text';
-import { FONT_SIZE, COLORS } from '@constants/theme';
+import { FONTS, FONT_SIZE, COLORS } from '@constants/theme';
 
 export default function Step01() {
   return (
@@ -30,9 +30,9 @@ export default function Step01() {
 
 const styles = StyleSheet.create({
   highlight: {
+    fontFamily: FONTS.PRETENDARD_MEDIUM,
     fontSize: FONT_SIZE.MEDIUM,
     color: COLORS.PRIMARY,
-    fontWeight: '600',
     marginTop: 20,
   },
 });

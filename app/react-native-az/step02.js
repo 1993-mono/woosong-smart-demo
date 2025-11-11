@@ -17,16 +17,16 @@ export default function Step02() {
           style={styles.avatar}
         />
         <View style={styles.info}>
-          <Text style={styles.name}>홍길동</Text>
-          <Text style={styles.email}>hong@example.com</Text>
-          <Text style={styles.address}>React Native를 배우고 있는 개발자입니다.</Text>
+          <Text fontSize={FONT_SIZE.MEDIUM} fontWeight="700" style={styles.name}>홍길동</Text>
+          <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHT} style={styles.email}>hong@example.com</Text>
+          <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHTER} style={styles.address}>React Native를 배우고 있는 개발자입니다.</Text>
         </View>
       </View>
 
       {/* 간단한 카드 예제 */}
       <View style={styles.simpleCard}>
-        <Text style={styles.cardTitle}>카드 제목</Text>
-        <Text style={styles.cardContent}>이것은 View와 Text 컴포넌트로 만든 간단한 카드입니다.</Text>
+        <Text fontSize={FONT_SIZE.LARGE} fontWeight="700" style={styles.cardTitle}>카드 제목</Text>
+        <Text color={COLORS.TEXT_LIGHT} style={styles.cardContent}>이것은 View와 Text 컴포넌트로 만든 간단한 카드입니다.</Text>
       </View>
     </StepLayout>
   );
@@ -60,22 +60,10 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   name: {
-    fontSize: FONT_SIZE.MEDIUM,
-    color: COLORS.TEXT,
-    fontWeight: '700',
-    lineHeight: FONT_SIZE.MEDIUM * 1.5,
     marginBottom: 4,
   },
   email: {
-    fontSize: FONT_SIZE.SMALL,
-    color: COLORS.TEXT_LIGHT,
-    lineHeight: FONT_SIZE.SMALL * 1.5,
     marginBottom: 8,
-  },
-  address: {
-    fontSize: FONT_SIZE.SMALL,
-    color: COLORS.TEXT_LIGHTER,
-    lineHeight: FONT_SIZE.SMALL * 1.5,
   },
   simpleCard: {
     borderRadius: 10,
@@ -90,16 +78,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   cardTitle: {
-    fontSize: FONT_SIZE.LARGE,
-    color: COLORS.TEXT,
-    fontWeight: '700',
-    lineHeight: FONT_SIZE.LARGE * 1.5,
     marginBottom: 10,
-  },
-  cardContent: {
-    fontSize: FONT_SIZE.BASE,
-    color: COLORS.TEXT_LIGHT,
-    lineHeight: FONT_SIZE.BASE * 1.5,
   },
 });
 

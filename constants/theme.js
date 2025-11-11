@@ -1,5 +1,13 @@
 export const FONTS = {
-  PRETENDARD: 'Pretendard',
+  PRETENDARD_THIN: 'Pretendard-Thin',
+  PRETENDARD_EXTRA_LIGHT: 'Pretendard-ExtraLight',
+  PRETENDARD_LIGHT: 'Pretendard-Light',
+  PRETENDARD_REGULAR: 'Pretendard-Regular',
+  PRETENDARD_MEDIUM: 'Pretendard-Medium',
+  PRETENDARD_SEMI_BOLD: 'Pretendard-SemiBold',
+  PRETENDARD_BOLD: 'Pretendard-Bold',
+  PRETENDARD_EXTRA_BOLD: 'Pretendard-ExtraBold',
+  PRETENDARD_BLACK: 'Pretendard-Black',
 };
 
 export const FONT_SIZE = {

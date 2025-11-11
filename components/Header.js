@@ -1,10 +1,14 @@
-import { StyleSheet, View, TouchableOpacity, Text, ScrollView, BackHandler, Animated, Easing, Dimensions } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, ScrollView, BackHandler, Animated, Easing, Dimensions } from 'react-native';
+import Text from '@components/Text';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, usePathname } from 'expo-router';
-import { FONTS, FONT_SIZE, COLORS, SPACING, LAYOUT } from '@constants/theme';
+import { FONT_SIZE, COLORS, SPACING, LAYOUT } from '@constants/theme';
+
+// Data
 import { MENU_ITEMS } from '@constants/menu';
+import { USER_DATA } from '@constants/userData';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -54,7 +58,7 @@ export default function Header() {
 
   const handleMenuItemPress = (path) => {
     router.push(path);
-    setMenuVisible(false);
+    handleMenuClose(false);
   };
 
   const renderMenuItem = (item, depth = 0) => {
@@ -72,17 +76,21 @@ export default function Header() {
           accessibilityLabel={item.label}
           accessibilityHint={`${item.label} 화면으로 이동합니다.`}
           accessibilityState={{ selected: isActive }}
-        ></TouchableOpacity>
-        <Text
-          style={[
-            styles[`menu${depth + 1}DepthText`],
-            isActive && styles[`menu${depth + 1}DepthTextActive`],
-          ]}
         >
-          {item.label}
-        </Text>
-
-        {item.children && item.children.map((child) => renderMenuItem(child, depth + 1))}
+          <Text
+            style={[
+              styles[`menu${depth + 1}DepthText`],
+              isActive && styles[`menu${depth + 1}DepthTextActive`],
+            ]}
+          >
+            {item.label}
+          </Text>
+        </TouchableOpacity>
+        {item.children && (
+          <View style={styles[`menu${depth + 2}DepthList`]}>
+            {item.children.map((child) => renderMenuItem(child, depth + 1))}
+          </View>
+        )}
       </View>
     );
   };
@@ -101,6 +109,8 @@ export default function Header() {
       >
         <View style={styles.leftContainer}>
           <Text
+            fontSize={FONT_SIZE.LARGE}
+            fontWeight="700"
             style={styles.logoText}
             accessibilityRole="text"
             accessibilityLabel="로고"
@@ -142,22 +152,28 @@ export default function Header() {
           accessibilityRole="header"
           accessibilityLabel="메뉴 헤더"
         >
+          <View style={styles.menuTitleWrapper}>
+            <Text fontSize={FONT_SIZE.SMALL} fontWeight="700" style={styles.menuTitleName}>{USER_DATA.name}</Text>
+            <Text fontSize={FONT_SIZE.SMALL} style={styles.menuTitleDepartment}>( {USER_DATA.department} )</Text>
+          </View>
           <TouchableOpacity
+            style={styles.menuButtonClose}
             onPress={handleMenuClose}
             accessibilityRole="button"
             accessibilityLabel="메뉴 닫기"
             accessibilityHint="메뉴를 닫습니다."
           >
-            <Ionicons name="chevron-back-outline" size={24} color={COLORS.TEXT} accessible={false} />
+            <Ionicons name="chevron-forward-outline" size={24} color={COLORS.TEXT} accessible={false} />
           </TouchableOpacity>
-          <Text style={styles.menuTitle}>전체 서비스</Text>
         </View>
         <ScrollView
           style={styles.menuItems}
           accessibilityRole="list"
           accessibilityLabel="메뉴 목록"
         >
-          {MENU_ITEMS.map((item) => renderMenuItem(item, 0))}
+          <View style={styles.menu1DepthList}>
+            {MENU_ITEMS.map((item) => renderMenuItem(item, 0))}
+          </View>
         </ScrollView>
       </Animated.View>
     </>
@@ -182,12 +198,6 @@ const styles = StyleSheet.create({
   leftContainer: {
     flex: 1,
   },
-  logoText: {
-    fontFamily: FONTS.PRETENDARD,
-    fontSize: FONT_SIZE.LARGE,
-    color: COLORS.TEXT,
-    fontWeight: 'bold',
-  },
   rightContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -202,5 +212,30 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     zIndex: 101,
-  }
+  },
+  menuHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: LAYOUT.HEADER_HEIGHT,
+    paddingHorizontal: LAYOUT.PADDING_HORIZONTAL,
+    marginBottom: SPACING.MEDIUM,
+  },
+  menuItems: {
+    paddingHorizontal: LAYOUT.PADDING_HORIZONTAL,
+  },
+  menu1DepthText: {
+    fontSize: FONT_SIZE.SMALL,
+    fontWeight: '700',
+  },
+  menu2DepthList: {
+    borderLeftWidth: 3,
+    borderLeftColor: COLORS.BORDER,
+    paddingLeft: SPACING.MEDIUM,
+    marginVertical: SPACING.SMALL,
+  },
+  menu2DepthText: {
+    paddingVertical: SPACING.XS,
+    fontSize: FONT_SIZE.SMALL,
+  },
 });
