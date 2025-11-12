@@ -3,7 +3,7 @@ import Layout_ReactNativeAz from '@components/Layout_ReactNativeAz';
 import Text from '@components/Text';
 import { FONT_SIZE, COLORS } from '@constants/theme';
 
-export default function Step02() {
+export default function ReactNativeAz_Step02() {
   return (
     <Layout_ReactNativeAz label="Step 02. 기본 컴포넌트" backgroundColor={COLORS.BACKGROUND}>
       {/* 프로필 카드 예제 */}

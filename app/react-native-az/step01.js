@@ -3,7 +3,7 @@ import { FONTS, FONT_SIZE, COLORS, SPACING } from '@constants/theme';
 import Layout_ReactNativeAz from '@components/Layout_ReactNativeAz';
 import Text from '@components/Text';
 
-export default function Step01() {
+export default function ReactNativeAz_Step01() {
   return (
     <Layout_ReactNativeAz label="Step 01. 새 페이지 및 컴포넌트 생성">
       <View style={styles.container}>
