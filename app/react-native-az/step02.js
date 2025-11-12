@@ -1,15 +1,11 @@
 import { StyleSheet, View, Image } from 'react-native';
-import StepLayout from '@components/StepLayout';
+import Layout_ReactNativeAz from '@components/Layout_ReactNativeAz';
 import Text from '@components/Text';
 import { FONT_SIZE, COLORS } from '@constants/theme';
 
 export default function Step02() {
   return (
-    <StepLayout
-      stepNumber="02"
-      stepTitle="기본 컴포넌트"
-      style={{ backgroundColor: COLORS.BACKGROUND }}
-    >
+    <Layout_ReactNativeAz label="Step 02. 기본 컴포넌트" backgroundColor={COLORS.BACKGROUND}>
       {/* 프로필 카드 예제 */}
       <View style={styles.card}>
         <Image
@@ -28,7 +24,7 @@ export default function Step02() {
         <Text fontSize={FONT_SIZE.LARGE} fontWeight="700" style={styles.cardTitle}>카드 제목</Text>
         <Text color={COLORS.TEXT_LIGHT} style={styles.cardContent}>이것은 View와 Text 컴포넌트로 만든 간단한 카드입니다.</Text>
       </View>
-    </StepLayout>
+    </Layout_ReactNativeAz>
   );
 }
 

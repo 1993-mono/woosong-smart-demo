@@ -24,7 +24,7 @@ export const COLORS = {
   TEXT: '#333',
   TEXT_LIGHT: '#666',
   TEXT_LIGHTER: '#999',
-  BACKGROUND: '#f0f0f0',
+  BACKGROUND: '#f5f5f5',
   BORDER: '#e0e0e0',
 };
 
