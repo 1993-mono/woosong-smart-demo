@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableOpacity, ScrollView, BackHandler, Animated, 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, usePathname } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useScrollStore } from '@store/scrollStore';
 import { FONT_SIZE, COLORS, SPACING, LAYOUT } from '@constants/theme';
 import Text from '@components/Text';
 
@@ -18,6 +19,50 @@ export default function Header() {
   const pathname = usePathname();
   const [menuVisible, setMenuVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const scrollY = useScrollStore((state) => state.scrollY);
+  const setScrollY = useScrollStore((state) => state.setScrollY);
+  const headerTranslateY = useRef(new Animated.Value(0)).current;
+  const isResettingRef = useRef(false);
+  const isFirstScroll = useRef(true);
+
+  useEffect(() => {
+    isResettingRef.current = true;
+    isFirstScroll.current = true;
+
+    setScrollY(0);
+    useScrollStore.setState({ lastScrollY: 0 });
+
+    Animated.timing(headerTranslateY, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true
+    }).start(() => {
+      isResettingRef.current = false;
+    });
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isResettingRef.current) return;
+
+    if (isFirstScroll.current) {
+      useScrollStore.setState({ lastScrollY: scrollY });
+      headerTranslateY.setValue(0);
+      isFirstScroll.current = false;
+      return;
+    }
+
+    const diff = scrollY - useScrollStore.getState().lastScrollY;
+    const currentY = headerTranslateY._value || 0;
+    let targetY = currentY;
+
+    if (diff > 0) {
+      targetY = Math.max(currentY - diff, -LAYOUT.HEADER_HEIGHT);
+    } else if (diff < 0) {
+      targetY = Math.min(currentY - diff, 0);
+    }
+
+    headerTranslateY.setValue(targetY);
+  }, [scrollY]);
 
   useEffect(() => {
     if (!menuVisible) return;
@@ -102,8 +147,14 @@ export default function Header() {
 
   return (
     <>
-      <View
-        style={[styles.header, { height: LAYOUT.HEADER_HEIGHT }]}
+      <Animated.View
+        style={[
+          styles.header,
+          {
+            height: LAYOUT.HEADER_HEIGHT,
+            transform: [{ translateY: headerTranslateY }],
+          }
+        ]}
         accessibilityRole="header"
         accessibilityLabel="앱 헤더"
       >
@@ -131,7 +182,7 @@ export default function Header() {
             <Ionicons name="menu" size={24} color={COLORS.TEXT} accessible={false} />
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
 
       <Animated.View
         style={[

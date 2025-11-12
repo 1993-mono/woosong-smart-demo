@@ -1,15 +1,41 @@
-import { StyleSheet, View } from 'react-native';
+import ScrollView from '@components/ScrollView';
+import Text from '@components/Text';
 
-export default function Header() {
+export default function Home() {
   return (
-    <View style={styles.container}>
-      {/* Header 내용은 다음에 구현 */}
-    </View>
+    <ScrollView>
+      <Text>
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.{'\n'}
+        홈 화면입니다.
+      </Text>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // 스타일은 다음에 구현
-  },
-});
