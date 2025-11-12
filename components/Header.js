@@ -1,16 +1,16 @@
-import { StyleSheet, View, TouchableOpacity, ScrollView, BackHandler, Animated, Easing, Dimensions } from 'react-native';
-import Text from '@components/Text';
-import { Ionicons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useState, useEffect, useRef } from 'react';
+import { StyleSheet, View, TouchableOpacity, ScrollView, BackHandler, Animated, Easing, Dimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, usePathname } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { FONT_SIZE, COLORS, SPACING, LAYOUT } from '@constants/theme';
+import Text from '@components/Text';
 
 // Data
 import { MENU_ITEMS } from '@constants/menu';
 import { USER_DATA } from '@constants/userData';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function Header() {
   const insets = useSafeAreaInsets();
@@ -103,7 +103,7 @@ export default function Header() {
   return (
     <>
       <View
-        style={[styles.container, { height: insets.top + LAYOUT.HEADER_HEIGHT, paddingTop: insets.top }]}
+        style={[styles.header, { height: LAYOUT.HEADER_HEIGHT }]}
         accessibilityRole="header"
         accessibilityLabel="앱 헤더"
       >
@@ -135,9 +135,8 @@ export default function Header() {
 
       <Animated.View
         style={[
-          styles.menuContainer,
+          styles.menu,
           {
-            paddingTop: insets.top,
             paddingBottom: insets.bottom,
             transform: [{ translateX }],
             pointerEvents: menuVisible ? 'auto' : 'none',
@@ -181,7 +180,7 @@ export default function Header() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -204,9 +203,9 @@ const styles = StyleSheet.create({
     gap: SPACING.SMALL,
     marginLeft: SPACING.LARGE,
   },
-  menuContainer: {
+  menu: {
     width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    height: '100%',
     backgroundColor: '#fff',
     position: 'absolute',
     right: 0,

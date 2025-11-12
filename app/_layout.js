@@ -1,12 +1,11 @@
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Stack } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomSplashScreen from '@components/SplashScreen';
 import Header from '@components/Header';
 import BottomNavigation from '@components/BottomNavigation';
-import { LAYOUT } from '@constants/theme';
 
 /*
   # SplashScreen : 앱이 시작될 때 보이는 초기 화면
@@ -43,30 +42,36 @@ export default function RootLayout() {
   }
 
   return (
-    <View style={styles.container}>
-      <Header />
-      {/*
+    <SafeAreaView edges={['top']} style={styles.safeAreaContainer}>
+      <View style={styles.container}>
+        <Header />
+        {/*
           # Stack : Expo Router의 스택 네비게이션 컴포넌트
             - 파일 기반 라우팅을 사용하여 자동으로 화면을 등록합니다.
             - screenOptions로 모든 화면에 공통으로 적용될 스타일을 설정할 수 있습니다.
         */}
-      <View style={[styles.stackContainer, { paddingTop: insets.top + LAYOUT.HEADER_HEIGHT }]}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-          }}
-        />
+        <View style={styles.stackContainer}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          />
+        </View>
+        <View style={styles.bottomNavContainer}>
+          <BottomNavigation />
+        </View>
       </View>
-      <View style={styles.bottomNavContainer}>
-        <BottomNavigation />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
+    position: 'relative',
     overflow: 'hidden',
   },
   scrollView: {
