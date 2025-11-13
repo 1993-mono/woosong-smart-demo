@@ -1,4 +1,5 @@
-import { StyleSheet, View } from 'react-native';
+import { useEffect } from 'react';
+import { BackHandler, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -22,6 +23,21 @@ export default function RootLayout() {
   const pathname = usePathname();
   const pathLevel = pathname.split('/').filter(segment => segment !== '').length;
   const shouldUseSubHeader = pathLevel >= 2;
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      const isRootPage = pathname === '/' || pathname === '/react-native-az';
+
+      if (isRootPage) {
+        BackHandler.exitApp();
+        return true;
+      }
+
+      return false;
+    });
+
+    return () => backHandler.remove();
+  }, [pathname]);
 
   /*
     # useFonts : 커스텀 폰트를 로드하는 Hook

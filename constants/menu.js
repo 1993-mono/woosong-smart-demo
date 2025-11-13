@@ -13,6 +13,11 @@ export const MENU_ITEMS = [
         key: 'az-step02',
         label: 'Step 02. 기본 컴포넌트',
         path: '/react-native-az/step02',
+      },
+      {
+        key: 'az-step03',
+        label: 'Step 03. 레이아웃과 스타일링',
+        path: '/react-native-az/step03',
       }
     ]
   }
