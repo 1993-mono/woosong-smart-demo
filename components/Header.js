@@ -245,9 +245,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 100,
   },
-  leftContainer: {
-    flex: 1,
-  },
   rightContainer: {
     flexDirection: 'row',
     alignItems: 'center',

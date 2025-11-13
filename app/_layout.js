@@ -1,10 +1,11 @@
 import { StyleSheet, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { Stack } from 'expo-router';
+import { usePathname, Stack } from 'expo-router';
 import CustomSplashScreen from '@components/SplashScreen';
 import Header from '@components/Header';
+import SubHeader from '@components/SubHeader';
 import BottomNavigation from '@components/BottomNavigation';
 
 /*
@@ -18,7 +19,9 @@ SplashScreen.preventAutoHideAsync();
 SplashScreen.hideAsync();
 
 export default function RootLayout() {
-  const insets = useSafeAreaInsets();
+  const pathname = usePathname();
+  const pathLevel = pathname.split('/').filter(segment => segment !== '').length;
+  const shouldUseSubHeader = pathLevel >= 2;
 
   /*
     # useFonts : 커스텀 폰트를 로드하는 Hook
@@ -44,7 +47,7 @@ export default function RootLayout() {
   return (
     <SafeAreaView edges={['top']} style={styles.safeAreaContainer}>
       <View style={styles.container}>
-        <Header />
+        {shouldUseSubHeader ? <SubHeader /> : <Header />}
         {/*
           # Stack : Expo Router의 스택 네비게이션 컴포넌트
             - 파일 기반 라우팅을 사용하여 자동으로 화면을 등록합니다.

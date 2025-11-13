@@ -29,7 +29,12 @@ export default function BottomNavigation() {
           <TouchableOpacity
             key={item.key}
             style={[styles.menuItem, active && styles.menuItemActive]}
-            onPress={() => router.push(item.path)}
+            onPress={() => {
+              if (router.canGoBack()) {
+                router.dismissAll();
+              }
+              router.replace(item.path);
+            }}
             accessibilityRole="button"
             accessibilityLabel={item.label}
             accessibilityHint={`${item.label} 화면으로 이동합니다.`}
