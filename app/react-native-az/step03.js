@@ -9,7 +9,7 @@ export default function ReactNativeAz_Step03() {
       <View style={styles.container}>
         {/* Flexbox 예제 1 : flexDirection */}
         <View style={styles.section}>
-          <Text fontWeight="700" style={styles.sectionTitle}>
+          <Text style={styles.sectionTitle}>
             flexDirection 예제
           </Text>
           <View style={[styles.sectionContent, styles.rowExample]}>
@@ -27,7 +27,7 @@ export default function ReactNativeAz_Step03() {
 
         {/* Flexbox 예제 2 : justifyContent */}
         <View style={styles.section}>
-          <Text fontWeight="700" style={styles.sectionTitle}>
+          <Text style={styles.sectionTitle}>
             justifyContent 예제
           </Text>
           <View style={[styles.sectionContent, styles.justifyExample]}>
@@ -45,7 +45,7 @@ export default function ReactNativeAz_Step03() {
 
         {/* Flexbox 예제 3 : alignItems */}
         <View style={styles.section}>
-          <Text fontWeight="700" style={styles.sectionTitle}>
+          <Text style={styles.sectionTitle}>
             alignItems 예제
           </Text>
           <View style={[styles.sectionContent, styles.alignExample]}>
@@ -60,7 +60,7 @@ export default function ReactNativeAz_Step03() {
 
         {/* Flexbox 예제 4 : flex 속성 */}
         <View style={styles.section}>
-          <Text fontWeight="700" style={styles.sectionTitle}>
+          <Text style={styles.sectionTitle}>
             flex 예제
           </Text>
           <View style={[styles.sectionContent, styles.flexExample]}>
@@ -78,24 +78,24 @@ export default function ReactNativeAz_Step03() {
 
         {/* 카드 그리드 레이아웃 */}
         <View style={styles.section}>
-          <Text fontWeight="700" style={styles.sectionTitle}>
+          <Text style={styles.sectionTitle}>
             카드 그리드 레이아웃
           </Text>
           <View style={[styles.sectionContent, styles.grid]}>
             <View style={styles.gridCard}>
-              <Text fontSize={FONT_SIZE.SMALL} fontWeight="700" style={styles.cardTitle}>카드 1</Text>
+              <Text style={styles.cardTitle}>카드 1</Text>
               <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHT} style={styles.cardContent}>내용 1</Text>
             </View>
             <View style={styles.gridCard}>
-              <Text fontSize={FONT_SIZE.SMALL} fontWeight="700" style={styles.cardTitle}>카드 2</Text>
+              <Text style={styles.cardTitle}>카드 2</Text>
               <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHT} style={styles.cardContent}>내용 2</Text>
             </View>
             <View style={styles.gridCard}>
-              <Text fontSize={FONT_SIZE.SMALL} fontWeight="700" style={styles.cardTitle}>카드 3</Text>
+              <Text style={styles.cardTitle}>카드 3</Text>
               <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHT} style={styles.cardContent}>내용 3</Text>
             </View>
             <View style={styles.gridCard}>
-              <Text fontSize={FONT_SIZE.SMALL} fontWeight="700" style={styles.cardTitle}>카드 4</Text>
+              <Text style={styles.cardTitle}>카드 4</Text>
               <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHT} style={styles.cardContent}>내용 4</Text>
             </View>
           </View>
@@ -103,11 +103,11 @@ export default function ReactNativeAz_Step03() {
 
         {/* 스타일링 예제 : 그림자와 borderRadius */}
         <View style={styles.section}>
-          <Text fontWeight="700" style={styles.sectionTitle}>
+          <Text style={styles.sectionTitle}>
             스타일링 예제
           </Text>
           <View style={[styles.sectionContent, styles.styledCard]}>
-            <Text fontSize={FONT_SIZE.SMALL} fontWeight="700" style={styles.cardTitle}>
+            <Text style={styles.cardTitle}>
               그림자와 둥근 모서리
             </Text>
             <Text fontSize={FONT_SIZE.SMALL} color={COLORS.TEXT_LIGHT} style={styles.cardContent}>
@@ -213,6 +213,10 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.1,
     padding: SPACING.MEDIUM,
+  },
+  cardTitle: {
+    fontSize: FONT_SIZE.SMALL,
+    fontWeight: '700',
   },
   cardContent: {
     marginTop: SPACING.XS,

@@ -18,7 +18,12 @@ export const MENU_ITEMS = [
         key: 'az-step03',
         label: 'Step 03. 레이아웃과 스타일링',
         path: '/react-native-az/step03',
-      }
+      },
+      {
+        key: 'az-step04',
+        label: 'Step 04. 상태 관리와 이벤트 처리',
+        path: '/react-native-az/step04',
+      },
     ]
   }
 ];
