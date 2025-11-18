@@ -155,8 +155,3 @@ const styles = StyleSheet.create({
 -   Expo는 React Native 개발을 쉽게 만들어주는 도구입니다
 -   컴포넌트 기반으로 앱을 구성합니다
 -   스타일링은 StyleSheet API를 사용합니다
-
-## ➡️ 다음 단계
-
-다음 가이드에서는 개발 환경에 대해 자세히 알아보겠습니다.
-👉 [02. 개발 환경 이해하기](./02-development-environment.md)

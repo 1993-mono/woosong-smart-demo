@@ -39,6 +39,11 @@ export const MENU_ITEMS = [
         label: 'Step 05-03. 플랫리스트 (무한 스크롤)',
         path: '/react-native-az/step05_03',
       },
+      {
+        key: 'az-step06',
+        label: 'Step 06. 입력 컴포넌트',
+        path: '/react-native-az/step06',
+      },
     ]
   }
 ];

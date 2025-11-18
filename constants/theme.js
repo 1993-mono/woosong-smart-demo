@@ -21,6 +21,7 @@ export const FONT_SIZE = {
 
 export const COLORS = {
   PRIMARY: '#06c',
+  RED: '#ff0000',
   TEXT: '#333',
   TEXT_LIGHT: '#666',
   TEXT_LIGHTER: '#999',

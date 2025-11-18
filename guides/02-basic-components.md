@@ -257,7 +257,3 @@ const styles = StyleSheet.create({
 -   **Image**: 이미지 표시 (width, height 필요)
 -   **StyleSheet**: 스타일을 정의하는 API
 -   컴포넌트를 조합하여 복잡한 UI 만들기 가능
-
-## ➡️ 다음 단계
-
-다음 실습에서는 기본 컴포넌트들을 사용하여 실제 화면을 만들어보겠습니다!

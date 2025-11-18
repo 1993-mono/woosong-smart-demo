@@ -1,11 +1,11 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import ScrollView from '@components/ScrollView';
 import Text from '@components/Text';
 import { FONT_SIZE, SPACING, LAYOUT } from '@constants/theme';
 
 export default function Layout_ReactNativeAz({
   label,
-  type = 'scroll', // 'scroll' || 'view'
+  type = 'scroll', // 'scroll' || 'view' || 'form'
   backgroundColor = '#fff',
   children
 }) {
@@ -34,6 +34,20 @@ export default function Layout_ReactNativeAz({
     );
   }
 
+  if (type === 'form') {
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardAvoidingView}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      >
+        <ScrollView style={[styles.background, { backgroundColor }]} keyboardShouldPersistTaps="handled">
+          {content}
+        </ScrollView>
+      </KeyboardAvoidingView>
+    );
+  }
+
   return (
     <ScrollView style={[styles.background, { backgroundColor }]}>
       {content}
@@ -42,6 +56,9 @@ export default function Layout_ReactNativeAz({
 }
 
 const styles = StyleSheet.create({
+  keyboardAvoidingView: {
+    flex: 1,
+  },
   background: {
     flex: 1,
   },
