@@ -49,6 +49,16 @@ export const MENU_ITEMS = [
         label: 'Step 06-02. 입력 컴포넌트 (라이브러리)',
         path: '/react-native-az/step06_02',
       },
+      {
+        key: 'az-step07-01',
+        label: 'Step 07-01. 이미지 컴포넌트 (기본)',
+        path: '/react-native-az/step07_01',
+      },
+      {
+        key: 'az-step07-02',
+        label: 'Step 07-02. 이미지 컴포넌트 (고급)',
+        path: '/react-native-az/step07_02',
+      },
     ]
   }
 ];
