@@ -4,7 +4,7 @@ import Layout_ReactNativeAz from '@components/Layout_ReactNativeAz';
 import Text from '@components/Text';
 import { FONT_SIZE, COLORS, SPACING } from '@constants/theme';
 
-export default function ReactNativeAz_Step06() {
+export default function ReactNativeAz_Step06_01() {
   // 기본 텍스트 입력 상태
   const [text, setText] = useState('');
 
@@ -104,7 +104,7 @@ export default function ReactNativeAz_Step06() {
   };
 
   return (
-    <Layout_ReactNativeAz label="Step 06. 입력 컴포넌트" type="form" backgroundColor={COLORS.BACKGROUND}>
+    <Layout_ReactNativeAz label="Step 06-01. 입력 컴포넌트" type="form" backgroundColor={COLORS.BACKGROUND}>
       <View style={styles.container}>
         {/* 기본 텍스트 입력 예제 */}
         <View style={styles.section}>

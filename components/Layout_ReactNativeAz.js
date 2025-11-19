@@ -39,7 +39,6 @@ export default function Layout_ReactNativeAz({
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardAvoidingView}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
       >
         <ScrollView style={[styles.background, { backgroundColor }]} keyboardShouldPersistTaps="handled">
           {content}
