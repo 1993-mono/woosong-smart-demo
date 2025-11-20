@@ -611,7 +611,3 @@ const styles = StyleSheet.create({
 -   **onRefresh**: Pull-to-refresh 핸들러
 -   **onEndReached**: 무한 스크롤 핸들러
 -   적은 데이터는 ScrollView, 많은 데이터는 FlatList 사용
-
-## ➡️ 다음 단계
-
-다음 실습에서는 리스트와 스크롤뷰를 활용하여 실제 리스트 화면을 만들어보겠습니다!

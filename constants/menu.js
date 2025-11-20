@@ -59,6 +59,11 @@ export const MENU_ITEMS = [
         label: 'Step 07-02. 이미지 컴포넌트 (고급)',
         path: '/react-native-az/step07_02',
       },
+      {
+        key: 'az-step08',
+        label: 'Step 08. 모달과 알림',
+        path: '/react-native-az/step08',
+      },
     ]
   }
 ];

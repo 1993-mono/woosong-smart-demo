@@ -338,7 +338,3 @@ const styles = StyleSheet.create({
 -   **borderRadius**: 모서리 둥글게
 -   **그림자**: elevation (Android), shadow\* (iOS)
 -   **반응형**: Dimensions API 사용
-
-## ➡️ 다음 단계
-
-다음 실습에서는 레이아웃과 스타일링을 활용하여 실제 화면을 만들어보겠습니다!
