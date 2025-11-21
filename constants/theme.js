@@ -11,6 +11,7 @@ export const FONTS = {
 };
 
 export const FONT_SIZE = {
+  TINY: 12,
   SMALL: 14,
   BASE: 16,
   MEDIUM: 18,

@@ -64,6 +64,11 @@ export const MENU_ITEMS = [
         label: 'Step 08. 모달과 알림',
         path: '/react-native-az/step08',
       },
+      {
+        key: 'az-step09',
+        label: 'Step 09. 네비게이션 심화',
+        path: '/react-native-az/step09',
+      },
     ]
   }
 ];
