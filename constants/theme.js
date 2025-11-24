@@ -23,10 +23,13 @@ export const FONT_SIZE = {
 export const COLORS = {
   PRIMARY: '#06c',
   RED: '#ff0000',
+  RED_LIGHT: '#ff5555',
+  RED_LIGHTER: '#ff8888',
   TEXT: '#333',
   TEXT_LIGHT: '#666',
   TEXT_LIGHTER: '#999',
   BACKGROUND: '#f5f5f5',
+  BACKGROUND_SECONDARY: '#eee',
   BORDER: '#e0e0e0',
 };
 

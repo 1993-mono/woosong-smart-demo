@@ -69,6 +69,11 @@ export const MENU_ITEMS = [
         label: 'Step 09. 네비게이션 심화',
         path: '/react-native-az/step09',
       },
+      {
+        key: 'az-step10',
+        label: 'Step 10. 네트워크 요청과 API 통신',
+        path: '/react-native-az/step10',
+      },
     ]
   }
 ];
