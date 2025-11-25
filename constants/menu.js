@@ -74,6 +74,11 @@ export const MENU_ITEMS = [
         label: 'Step 10. 네트워크 요청과 API 통신',
         path: '/react-native-az/step10',
       },
+      {
+        key: 'az-step11',
+        label: 'Step 11. 데이터 저장 (AsyncStorage)',
+        path: '/react-native-az/step11',
+      },
     ]
   }
 ];
