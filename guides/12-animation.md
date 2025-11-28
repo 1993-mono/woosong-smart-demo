@@ -241,7 +241,7 @@ function AnimatedButton() {
         <TouchableOpacity
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
-            activeOpacity={1}
+            activeOpacity={1} // 터치 시 적용되는 투명도 기본값
         >
             <Animated.View
                 style={[
@@ -510,6 +510,36 @@ Animated.stagger(100, [
 
 ## 🎯 인터랙티브 애니메이션
 
+### PanResponder란?
+
+**PanResponder**는 React Native에서 제공하는 제스처 처리 시스템입니다. 터치 이벤트를 감지하고 처리하여 드래그, 스와이프 등의 인터랙티브 애니메이션을 구현할 수 있습니다.
+
+#### 특징
+
+-   터치 이벤트를 JavaScript 레벨에서 처리
+-   드래그, 스와이프, 핀치 등 다양한 제스처 지원
+-   여러 터치 포인트 동시 처리 가능
+-   제스처 충돌 해결 및 우선순위 관리
+
+#### 주요 핸들러
+
+1. **onMoveShouldSetPanResponder**: 터치 이동 시 PanResponder를 활성화할지 결정
+2. **onPanResponderGrant**: 터치가 시작될 때 호출 (터치 승인)
+3. **onPanResponderMove**: 터치가 이동하는 동안 호출
+4. **onPanResponderRelease**: 터치가 끝날 때 호출
+5. **onPanResponderTerminate**: 다른 제스처에 의해 취소될 때 호출
+
+#### setOffset과 flattenOffset
+
+-   **setOffset()**: 현재 위치를 기준점으로 설정하여 상대적 이동을 가능하게 함
+-   **flattenOffset()**: offset을 실제 값에 합산하고 offset을 0으로 리셋
+
+#### 주의사항
+
+-   PanResponder는 `useNativeDriver: false`를 사용해야 합니다
+-   레이아웃 속성(width, height 등)을 애니메이션할 때도 `useNativeDriver: false` 필요
+-   성능을 위해 가능한 한 transform 속성만 사용하는 것이 좋습니다
+
 ### PanResponder와 함께 사용
 
 ```javascript
@@ -521,17 +551,24 @@ function DraggableBox() {
 
     const panResponder = useRef(
         PanResponder.create({
+            // 터치 이동 시 PanResponder 활성화 여부 결정
             onMoveShouldSetPanResponder: () => true,
+
+            // 터치가 시작될 때 호출 (현재 위치를 기준점으로 설정)
             onPanResponderGrant: () => {
                 pan.setOffset({
                     x: pan.x._value,
                     y: pan.y._value,
                 });
             },
+
+            // 터치가 이동하는 동안 호출 (dx, dy는 이동 거리)
             onPanResponderMove: Animated.event(
                 [null, { dx: pan.x, dy: pan.y }],
-                { useNativeDriver: false }
+                { useNativeDriver: false } // PanResponder는 false 사용
             ),
+
+            // 터치가 끝날 때 호출 (offset을 실제 값에 합산)
             onPanResponderRelease: () => {
                 pan.flattenOffset();
             },
@@ -555,21 +592,153 @@ function DraggableBox() {
         </View>
     );
 }
+```
+
+#### `{...panResponder.panHandlers}` 설명
+
+`{...panResponder.panHandlers}`는 **스프레드 연산자(spread operator)**를 사용하여 PanResponder가 생성한 모든 이벤트 핸들러를 컴포넌트에 전개하여 적용합니다.
+
+**panHandlers가 포함하는 핸들러들:**
+
+-   `onStartShouldSetResponder`: 터치 시작 시 응답할지 결정
+-   `onMoveShouldSetResponder`: 터치 이동 시 응답할지 결정
+-   `onResponderGrant`: 터치가 승인될 때 호출
+-   `onResponderMove`: 터치가 이동하는 동안 호출
+-   `onResponderRelease`: 터치가 끝날 때 호출
+-   `onResponderTerminate`: 다른 제스처에 의해 취소될 때 호출
+
+**사용 이유:**
+
+-   여러 핸들러를 한 번에 적용할 수 있음
+-   코드가 간결해짐
+-   PanResponder가 자동으로 필요한 모든 핸들러를 생성
+
+**동일한 효과 (전개 연산자 없이):**
+
+```javascript
+<Animated.View
+    onStartShouldSetResponder={
+        panResponder.panHandlers.onStartShouldSetResponder
+    }
+    onMoveShouldSetResponder={panResponder.panHandlers.onMoveShouldSetResponder}
+    onResponderGrant={panResponder.panHandlers.onResponderGrant}
+    onResponderMove={panResponder.panHandlers.onResponderMove}
+    onResponderRelease={panResponder.panHandlers.onResponderRelease}
+    // ... 등등
+/>
+```
+
+**스프레드 연산자 사용:**
+
+```javascript
+{...panResponder.panHandlers}  // 모든 핸들러를 한 번에 적용
+```
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+container: {
+flex: 1,
+justifyContent: "center",
+alignItems: "center",
+},
+box: {
+width: 100,
+height: 100,
+backgroundColor: "#06c",
+borderRadius: 10,
+},
+});
+
+````
+
+### PanResponder 활용 예시
+
+#### 스와이프 감지
+
+```javascript
+const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: (evt, gestureState) => {
+        // 수평 이동이 수직 이동보다 클 때만 활성화
+        return Math.abs(gestureState.dx) > Math.abs(gestureState.dy);
     },
-    box: {
-        width: 100,
-        height: 100,
-        backgroundColor: "#06c",
-        borderRadius: 10,
+    onPanResponderRelease: (evt, gestureState) => {
+        // 오른쪽으로 스와이프 (dx > 50)
+        if (gestureState.dx > 50) {
+            console.log("오른쪽 스와이프");
+        }
+        // 왼쪽으로 스와이프 (dx < -50)
+        else if (gestureState.dx < -50) {
+            console.log("왼쪽 스와이프");
+        }
     },
 });
+````
+
+#### 제스처 속도 감지
+
+```javascript
+onPanResponderRelease: (evt, gestureState) => {
+    // 속도 계산 (vx, vy는 초당 픽셀 단위)
+    const velocity = Math.sqrt(
+        gestureState.vx * gestureState.vx + gestureState.vy * gestureState.vy
+    );
+
+    if (velocity > 0.5) {
+        // 빠른 스와이프 처리
+        console.log("빠른 제스처");
+    }
+},
 ```
+
+#### 경계 제한
+
+```javascript
+// 컨테이너 레이아웃 상태 관리
+const containerRef = useRef(null);
+const [containerLayout, setContainerLayout] = useState({ width: 0, height: 0 });
+
+const panResponder = PanResponder.create({
+    onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+        useNativeDriver: false,
+        listener: (evt, gestureState) => {
+            // 경계 제한: 박스가 컨테이너 밖으로 나가지 않도록
+            const maxX = containerLayout.width - BOX_SIZE;
+            const maxY = containerLayout.height - BOX_SIZE;
+
+            // 현재 위치 계산 (offset + dx)
+            const currentX = pan.x._value + gestureState.dx;
+            const currentY = pan.y._value + gestureState.dy;
+
+            // 경계 체크 및 제한
+            const clampedX = Math.max(0, Math.min(currentX, maxX));
+            const clampedY = Math.max(0, Math.min(currentY, maxY));
+
+            // 경계를 벗어나면 값 제한
+            if (currentX !== clampedX || currentY !== clampedY) {
+                pan.x.setValue(clampedX);
+                pan.y.setValue(clampedY);
+            }
+        },
+    }),
+});
+
+// 컨테이너에 레이아웃 측정
+<View
+    ref={containerRef}
+    onLayout={(event) => {
+        const { width, height } = event.nativeEvent.layout;
+        setContainerLayout({ width, height });
+    }}
+>
+    <Animated.View {...panResponder.panHandlers} />
+</View>;
+```
+
+**핵심 포인트:**
+
+-   `onLayout`: 컨테이너의 실제 크기를 측정
+-   `Math.max(0, ...)`: 최소값을 0으로 제한 (왼쪽/위 경계)
+-   `Math.min(..., maxX)`: 최대값을 컨테이너 크기로 제한 (오른쪽/아래 경계)
+-   `clampedX`, `clampedY`: 경계 내로 제한된 값
 
 ## 📊 interpolate
 

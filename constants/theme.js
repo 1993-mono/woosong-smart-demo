@@ -22,6 +22,7 @@ export const FONT_SIZE = {
 
 export const COLORS = {
   PRIMARY: '#06c',
+  SECONDARY: '#4ecdc4',
   RED: '#ff0000',
   RED_LIGHT: '#ff5555',
   RED_LIGHTER: '#ff8888',
@@ -31,6 +32,8 @@ export const COLORS = {
   BACKGROUND: '#f5f5f5',
   BACKGROUND_SECONDARY: '#eee',
   BORDER: '#e0e0e0',
+  BORDER_DARK: '#bbb',
+  BORDER_DARKER: '#888',
 };
 
 export const SPACING = {

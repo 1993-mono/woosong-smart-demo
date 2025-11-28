@@ -79,6 +79,11 @@ export const MENU_ITEMS = [
         label: 'Step 11. 데이터 저장 (AsyncStorage)',
         path: '/react-native-az/step11',
       },
+      {
+        key: 'az-step12',
+        label: 'Step 12. 애니메이션 (Animated API)',
+        path: '/react-native-az/step12',
+      },
     ]
   }
 ];
